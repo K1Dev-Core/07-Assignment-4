@@ -9,32 +9,55 @@ class ManageCoursesView {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>จัดการรายวิชา</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-lg shadow-xl p-8 mb-6">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6">จัดการรายวิชา</h1>
-                
-                <form action="add_course.php" method="POST" class="mb-8">
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold"><i class="fas fa-book mr-2"></i>จัดการรายวิชา</h1>
+            <nav class="flex gap-6">
+                <a href="index.php" class="text-emerald-300 hover:text-emerald-200 transition"><i class="fas fa-home mr-1"></i>หน้าหลัก</a>
+                <a href="manage_courses.php" class="font-bold text-emerald-100 hover:text-emerald-200 transition underline-offset-4 underline"><i class="fas fa-book mr-1"></i>จัดการรายวิชา</a>
+                <a href="add_grade.php" class="text-emerald-300 hover:text-emerald-200 transition"><i class="fas fa-plus-circle mr-1"></i>เพิ่มเกรด</a>
+                <a href="gpa_calculator.php" class="text-emerald-300 hover:text-emerald-200 transition"><i class="fas fa-calculator mr-1"></i>คำนวณ GPA</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 flex-grow">
+        <div class="bg-white rounded-lg shadow-xl overflow-hidden mb-6">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-6 px-6">
+                <h2 class="text-2xl font-bold"><i class="fas fa-plus-circle mr-2"></i>เพิ่มรายวิชาใหม่</h2>
+            </div>
+            <div class="p-6">
+                <form action="add_course.php" method="POST">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">ชื่อรายวิชา</label>
-                            <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-book mr-2"></i>ชื่อรายวิชา</label>
+                            <input type="text" name="name" required placeholder="เช่น หลักการเขียนโปรแกรม" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">หน่วยกิต</label>
-                            <input type="number" name="credit" step="0.5" min="0.5" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-hashtag mr-2"></i>หน่วยกิต</label>
+                            <input type="number" name="credit" step="0.5" min="0.5" required placeholder="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
                         </div>
                     </div>
-                    <button type="submit" class="mt-4 w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
-                        เพิ่มรายวิชา
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 px-6 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition">
+                        <i class="fas fa-plus mr-2"></i>เพิ่มรายวิชา
                     </button>
                 </form>
             </div>
+        </div>
 
-            <div class="bg-white rounded-lg shadow-xl p-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">รายการรายวิชา</h2>
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-6 px-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold"><i class="fas fa-list mr-2"></i>รายการรายวิชา</h2>
+                    <?php if (!empty($courses)): ?>
+                        <a href="clear_all_courses.php" onclick="return confirm('คุณต้องการลบรายวิชาทั้งหมดหรือไม่?')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                            <i class="fas fa-trash-alt mr-2"></i>ลบรายวิชาทั้งหมด
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <div class="p-6">
                 <?php if (empty($courses)): ?>
                     <p class="text-gray-500 text-center py-8">ยังไม่มีรายวิชา</p>
                 <?php else: ?>
@@ -55,8 +78,8 @@ class ManageCoursesView {
                                         <td class="border border-gray-300 px-4 py-3"><?php echo htmlspecialchars($course['name']); ?></td>
                                         <td class="border border-gray-300 px-4 py-3"><?php echo $course['credit']; ?></td>
                                         <td class="border border-gray-300 px-4 py-3">
-                                            <a href="delete_course.php?index=<?php echo $index; ?>" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded transition duration-200">
-                                                ลบ
+                                            <a href="delete_course.php?index=<?php echo $index; ?>" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded transition">
+                                                <i class="fas fa-trash mr-1"></i>ลบ
                                             </a>
                                         </td>
                                     </tr>
@@ -65,15 +88,17 @@ class ManageCoursesView {
                         </table>
                     </div>
                 <?php endif; ?>
-                
-                <div class="mt-6">
-                    <a href="index.php" class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
-                        กลับหน้าหลัก
-                    </a>
-                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <footer class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white mt-auto">
+        <div class="container mx-auto px-6 py-6">
+            <div class="text-center">
+                <p class="text-emerald-100">© 2025 ระบบคำนวณ GPA สงวนลิขสิทธิ์</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
         <?php

@@ -43,4 +43,10 @@ class CourseModel {
         }
         return false;
     }
+
+    public function clearAllCourses() {
+        unset($_SESSION['course_list']);
+        $_SESSION['course_list'] = [];
+        return true;
+    }
 }

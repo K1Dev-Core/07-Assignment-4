@@ -23,7 +23,7 @@ class AddGradeController {
             }
         }
         
-        header('Location: gpa_calculator.php');
+        header('Location: add_grade.php');
         exit;
     }
 }

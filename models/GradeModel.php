@@ -56,4 +56,19 @@ class GradeModel {
 
         return $totalCredits > 0 ? $totalWeightedPoints / $totalCredits : 0.0;
     }
+
+    public function deleteGrade($index) {
+        if (isset($_SESSION['courses'][$index])) {
+            unset($_SESSION['courses'][$index]);
+            $_SESSION['courses'] = array_values($_SESSION['courses']);
+            return true;
+        }
+        return false;
+    }
+
+    public function clearAllGrades() {
+        unset($_SESSION['courses']);
+        $_SESSION['courses'] = [];
+        return true;
+    }
 }

@@ -12,25 +12,93 @@ class GPACalculatorView {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>คำนวณ GPA</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <div class="max-w-6xl mx-auto">
-            <div class="bg-white rounded-lg shadow-xl p-8 mb-6">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6">คำนวณ GPA</h1>
-                
-                <?php if (empty($grades)): ?>
-                    <p class="text-gray-500 text-center py-8 mb-6">ยังไม่มีข้อมูลเกรด</p>
-                <?php else: ?>
-                    <div class="mb-6">
-                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg p-6 text-white">
-                            <div class="text-center">
-                                <p class="text-lg mb-2">เกรดเฉลี่ยสะสม (GPA)</p>
-                                <p class="text-5xl font-bold"><?php echo number_format($gpa, 2); ?></p>
-                            </div>
-                        </div>
-                    </div>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold"><i class="fas fa-calculator mr-2"></i>คำนวณ GPA</h1>
+            <nav class="flex gap-6">
+                <a href="index.php" class="text-emerald-300 hover:text-emerald-200 transition"><i class="fas fa-home mr-1"></i>หน้าหลัก</a>
+                <a href="manage_courses.php" class="text-emerald-300 hover:text-emerald-200 transition"><i class="fas fa-book mr-1"></i>จัดการรายวิชา</a>
+                <a href="add_grade.php" class="text-emerald-300 hover:text-emerald-200 transition"><i class="fas fa-plus-circle mr-1"></i>เพิ่มเกรด</a>
+                <a href="gpa_calculator.php" class="font-bold text-emerald-100 hover:text-emerald-200 transition underline-offset-4 underline"><i class="fas fa-calculator mr-1"></i>คำนวณ GPA</a>
+            </nav>
+        </div>
+    </header>
 
+    <main class="container mx-auto px-6 py-12 flex-grow">
+        <?php if (empty($grades)): ?>
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-8 px-6">
+                    <h2 class="text-3xl font-bold text-center">ยินดีต้อนรับสู่ระบบคำนวณ GPA</h2>
+                </div>
+                <div class="p-8 text-center">
+                    <p class="text-gray-600 mb-6">เพิ่มเกรดเพื่อเริ่มคำนวณ GPA</p>
+                    <a href="add_grade.php" class="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 px-6 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition">
+                        <i class="fas fa-plus-circle mr-2"></i>เพิ่มเกรดแรก
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition text-center">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-plus-circle text-4xl text-emerald-600 mb-3"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">เพิ่มเกรด</h3>
+                    <p class="text-gray-600 mb-4">บันทึกเกรดสำหรับรายวิชา</p>
+                    <a href="add_grade.php" class="block w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 px-4 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition"><i class="fas fa-plus-circle mr-2"></i>เพิ่มเกรด</a>
+                </div>
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition text-center">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-book text-4xl text-emerald-600 mb-3"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">จัดการรายวิชา</h3>
+                    <p class="text-gray-600 mb-4">เพิ่ม แก้ไข หรือลบรายวิชา</p>
+                    <a href="manage_courses.php" class="block w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 px-4 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition"><i class="fas fa-book mr-2"></i>จัดการรายวิชา</a>
+                </div>
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition text-center">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-home text-4xl text-emerald-600 mb-3"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">กลับหน้าหลัก</h3>
+                    <p class="text-gray-600 mb-4">กลับไปยังหน้าหลัก</p>
+                    <a href="index.php" class="block w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 px-4 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition"><i class="fas fa-home mr-2"></i>กลับหน้าหลัก</a>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden mb-6">
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-8 px-6">
+                    <div class="text-center">
+                        <p class="text-lg mb-2"><i class="fas fa-trophy mr-2"></i>เกรดเฉลี่ยสะสม (GPA)</p>
+                        <p class="text-5xl font-bold"><?php echo number_format($gpa, 2); ?></p>
+                        <p class="text-emerald-100 text-sm mt-2">
+                            <?php
+                            $totalCredits = 0;
+                            foreach ($grades as $gradeData) {
+                                foreach ($courses as $course) {
+                                    if ($course['name'] === $gradeData['name']) {
+                                        $totalCredits += $course['credit'];
+                                        break;
+                                    }
+                                }
+                            }
+                            echo "จาก " . count($grades) . " รายวิชา รวม " . $totalCredits . " หน่วยกิต";
+                            ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden mb-6">
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-6 px-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold"><i class="fas fa-list-alt mr-2"></i>รายละเอียดเกรด</h2>
+                    <a href="clear_all.php" onclick="return confirm('คุณต้องการลบข้อมูลทั้งหมด (รายวิชาและเกรด) หรือไม่?')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                        <i class="fas fa-trash-alt mr-2"></i>ลบข้อมูลทั้งหมด
+                    </a>
+                </div>
+                <div class="p-6">
                     <div class="overflow-x-auto">
                         <table class="w-full border-collapse">
                             <thead>
@@ -40,7 +108,7 @@ class GPACalculatorView {
                                     <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">หน่วยกิต</th>
                                     <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">เกรด</th>
                                     <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Grade Point</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Weighted Points</th>
+                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">การจัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,7 +138,11 @@ class GPACalculatorView {
                                         <td class="border border-gray-300 px-4 py-3"><?php echo $credit; ?></td>
                                         <td class="border border-gray-300 px-4 py-3"><?php echo $grade; ?></td>
                                         <td class="border border-gray-300 px-4 py-3"><?php echo number_format($gradePoint, 1); ?></td>
-                                        <td class="border border-gray-300 px-4 py-3"><?php echo number_format($weightedPoints, 2); ?></td>
+                                        <td class="border border-gray-300 px-4 py-3">
+                                            <a href="clear_grade.php?index=<?php echo $index; ?>" onclick="return confirm('คุณต้องการลบเกรดนี้หรือไม่?')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded transition">
+                                                <i class="fas fa-trash mr-1"></i>ลบ
+                                            </a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                                 <tr class="bg-gray-100 font-semibold">
@@ -78,27 +150,27 @@ class GPACalculatorView {
                                     <td class="border border-gray-300 px-4 py-3"><?php echo $totalCredits; ?></td>
                                     <td class="border border-gray-300 px-4 py-3">-</td>
                                     <td class="border border-gray-300 px-4 py-3">-</td>
-                                    <td class="border border-gray-300 px-4 py-3"><?php echo number_format($totalWeightedPoints, 2); ?></td>
+                                    <td class="border border-gray-300 px-4 py-3">
+                                        <a href="clear_all_grades.php" onclick="return confirm('คุณต้องการลบเกรดทั้งหมดหรือไม่?')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded transition">
+                                            <i class="fas fa-trash-alt mr-1"></i>ลบทั้งหมด
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                <?php endif; ?>
+                </div>
             </div>
+        <?php endif; ?>
+    </main>
 
-            <div class="flex gap-4">
-                <a href="add_grade.php" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">
-                    เพิ่มเกรด
-                </a>
-                <a href="manage_courses.php" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">
-                    จัดการรายวิชา
-                </a>
-                <a href="index.php" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">
-                    กลับหน้าหลัก
-                </a>
+    <footer class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white mt-auto">
+        <div class="container mx-auto px-6 py-6">
+            <div class="text-center">
+                <p class="text-emerald-100">© 2025 ระบบคำนวณ GPA สงวนลิขสิทธิ์</p>
             </div>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
         <?php

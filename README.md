@@ -6,4 +6,4 @@
 ```bash
 docker-compose up --build
 ```
-
+runing : http://localhost:8080
