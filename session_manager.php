@@ -5,7 +5,7 @@ require_once 'controllers/SessionManagerController.php';
 
 $controller = new SessionManagerController();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_GET['clear_type']) || ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_type']))) {
     $controller->clearSession();
 } else {
     $controller->index();

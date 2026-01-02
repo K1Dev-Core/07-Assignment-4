@@ -6,7 +6,7 @@ $messages = FlashMessage::get();
 if (!empty($messages)):
     $notificationId = 'notification-' . uniqid();
 ?>
-<div id="notification-container" class="fixed top-4 right-4 z-50 space-y-3" style="max-width: 400px;">
+<div id="notification-container" class="fixed top-4 right-2 sm:right-4 z-50 space-y-3" style="max-width: calc(100% - 1rem); width: 100%; max-width: 400px;">
 <?php
     foreach ($messages as $index => $message):
         $type = $message['type'];
@@ -39,11 +39,11 @@ if (!empty($messages)):
         }
         $itemId = 'notif-' . $index . '-' . uniqid();
 ?>
-    <div id="<?php echo $itemId; ?>" class="<?php echo $bgColor; ?> rounded-lg shadow-xl p-4 text-white animate-slide-in">
+    <div id="<?php echo $itemId; ?>" class="<?php echo $bgColor; ?> rounded-lg shadow-xl p-3 sm:p-4 text-white animate-slide-in">
         <div class="flex items-center">
-            <i class="fas <?php echo $icon; ?> text-xl mr-3"></i>
-            <p class="flex-1 font-medium"><?php echo htmlspecialchars($text); ?></p>
-            <button onclick="removeNotification('<?php echo $itemId; ?>')" class="ml-4 text-white hover:text-gray-200 transition">
+            <i class="fas <?php echo $icon; ?> text-lg sm:text-xl mr-2 sm:mr-3 flex-shrink-0"></i>
+            <p class="flex-1 font-medium text-sm sm:text-base pr-2"><?php echo htmlspecialchars($text); ?></p>
+            <button onclick="removeNotification('<?php echo $itemId; ?>')" class="ml-2 text-white hover:text-gray-200 transition flex-shrink-0">
                 <i class="fas fa-times"></i>
             </button>
         </div>
