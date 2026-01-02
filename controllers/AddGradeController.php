@@ -2,6 +2,7 @@
 require_once 'models/CourseModel.php';
 require_once 'models/GradeModel.php';
 require_once 'views/AddGradeView.php';
+require_once 'helpers/FlashMessage.php';
 
 class AddGradeController {
     public function index() {
@@ -20,6 +21,9 @@ class AddGradeController {
             if (!empty($courseName) && !empty($grade)) {
                 $model = new GradeModel();
                 $model->addGrade($courseName, $grade);
+                FlashMessage::success('เพิ่มเกรด "' . htmlspecialchars($grade) . '" สำหรับรายวิชา "' . htmlspecialchars($courseName) . '" สำเร็จแล้ว');
+            } else {
+                FlashMessage::error('กรุณาเลือกรายวิชาและเกรด');
             }
         }
         

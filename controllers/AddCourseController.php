@@ -1,5 +1,6 @@
 <?php
 require_once 'models/CourseModel.php';
+require_once 'helpers/FlashMessage.php';
 
 class AddCourseController {
     public function add() {
@@ -10,6 +11,9 @@ class AddCourseController {
             if (!empty($name) && $credit > 0) {
                 $model = new CourseModel();
                 $model->addCourse($name, $credit);
+                FlashMessage::success('เพิ่มรายวิชา "' . htmlspecialchars($name) . '" สำเร็จแล้ว');
+            } else {
+                FlashMessage::error('กรุณากรอกข้อมูลให้ครบถ้วน');
             }
         }
         

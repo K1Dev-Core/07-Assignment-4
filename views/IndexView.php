@@ -25,6 +25,7 @@ class IndexView {
     </header>
 
     <main class="container mx-auto px-6 py-12 flex-grow">
+        <?php require_once 'views/components/FlashMessages.php'; ?>
         <div class="bg-white rounded-lg shadow-xl overflow-hidden">
             <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-8 px-6">
                 <h2 class="text-3xl font-bold text-center">ยินดีต้อนรับสู่ระบบคำนวณ GPA</h2>
@@ -51,6 +52,8 @@ class IndexView {
             </div>
         </div>
     </main>
+
+    <?php require_once 'views/components/ConfirmModal.php'; ?>
 
     <footer class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white mt-auto">
         <div class="container mx-auto px-6 py-6">

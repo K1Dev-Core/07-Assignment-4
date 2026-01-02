@@ -28,6 +28,7 @@ class GPACalculatorView {
     </header>
 
     <main class="container mx-auto px-6 py-12 flex-grow">
+        <?php require_once 'views/components/FlashMessages.php'; ?>
         <?php if (empty($grades)): ?>
             <div class="bg-white rounded-lg shadow-xl overflow-hidden">
                 <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-8 px-6">
@@ -94,7 +95,7 @@ class GPACalculatorView {
             <div class="bg-white rounded-lg shadow-xl overflow-hidden mb-6">
                 <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-6 px-6 flex justify-between items-center">
                     <h2 class="text-2xl font-bold"><i class="fas fa-list-alt mr-2"></i>รายละเอียดเกรด</h2>
-                    <a href="clear_all.php" onclick="return confirm('คุณต้องการลบข้อมูลทั้งหมด (รายวิชาและเกรด) หรือไม่?')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                    <a href="#" onclick="confirmAction('คุณต้องการลบข้อมูลทั้งหมด (รายวิชาและเกรด) หรือไม่?', 'clear_all.php'); return false;" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
                         <i class="fas fa-trash-alt mr-2"></i>ลบข้อมูลทั้งหมด
                     </a>
                 </div>
@@ -139,7 +140,7 @@ class GPACalculatorView {
                                         <td class="border border-gray-300 px-4 py-3"><?php echo $grade; ?></td>
                                         <td class="border border-gray-300 px-4 py-3"><?php echo number_format($gradePoint, 1); ?></td>
                                         <td class="border border-gray-300 px-4 py-3">
-                                            <a href="clear_grade.php?index=<?php echo $index; ?>" onclick="return confirm('คุณต้องการลบเกรดนี้หรือไม่?')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded transition">
+                                            <a href="#" onclick="confirmAction('คุณต้องการลบเกรด &quot;<?php echo htmlspecialchars($grade, ENT_QUOTES); ?>&quot; ของรายวิชา &quot;<?php echo htmlspecialchars($courseName, ENT_QUOTES); ?>&quot; หรือไม่?', 'clear_grade.php?index=<?php echo $index; ?>'); return false;" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded transition">
                                                 <i class="fas fa-trash mr-1"></i>ลบ
                                             </a>
                                         </td>
@@ -151,7 +152,7 @@ class GPACalculatorView {
                                     <td class="border border-gray-300 px-4 py-3">-</td>
                                     <td class="border border-gray-300 px-4 py-3">-</td>
                                     <td class="border border-gray-300 px-4 py-3">
-                                        <a href="clear_all_grades.php" onclick="return confirm('คุณต้องการลบเกรดทั้งหมดหรือไม่?')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded transition">
+                                        <a href="#" onclick="confirmAction('คุณต้องการลบเกรดทั้งหมดหรือไม่?', 'clear_all_grades.php'); return false;" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded transition">
                                             <i class="fas fa-trash-alt mr-1"></i>ลบทั้งหมด
                                         </a>
                                     </td>
@@ -163,6 +164,8 @@ class GPACalculatorView {
             </div>
         <?php endif; ?>
     </main>
+
+    <?php require_once 'views/components/ConfirmModal.php'; ?>
 
     <footer class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white mt-auto">
         <div class="container mx-auto px-6 py-6">

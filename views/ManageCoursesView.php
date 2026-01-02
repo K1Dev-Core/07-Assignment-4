@@ -25,6 +25,7 @@ class ManageCoursesView {
     </header>
 
     <main class="container mx-auto px-6 py-12 flex-grow">
+        <?php require_once 'views/components/FlashMessages.php'; ?>
         <div class="bg-white rounded-lg shadow-xl overflow-hidden mb-6">
             <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-6 px-6">
                 <h2 class="text-2xl font-bold"><i class="fas fa-plus-circle mr-2"></i>เพิ่มรายวิชาใหม่</h2>
@@ -52,7 +53,7 @@ class ManageCoursesView {
                 <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-6 px-6 flex justify-between items-center">
                     <h2 class="text-2xl font-bold"><i class="fas fa-list mr-2"></i>รายการรายวิชา</h2>
                     <?php if (!empty($courses)): ?>
-                        <a href="clear_all_courses.php" onclick="return confirm('คุณต้องการลบรายวิชาทั้งหมดหรือไม่?')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                        <a href="#" onclick="confirmAction('คุณต้องการลบรายวิชาทั้งหมดหรือไม่?', 'clear_all_courses.php'); return false;" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
                             <i class="fas fa-trash-alt mr-2"></i>ลบรายวิชาทั้งหมด
                         </a>
                     <?php endif; ?>
@@ -78,7 +79,7 @@ class ManageCoursesView {
                                         <td class="border border-gray-300 px-4 py-3"><?php echo htmlspecialchars($course['name']); ?></td>
                                         <td class="border border-gray-300 px-4 py-3"><?php echo $course['credit']; ?></td>
                                         <td class="border border-gray-300 px-4 py-3">
-                                            <a href="delete_course.php?index=<?php echo $index; ?>" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded transition">
+                                            <a href="#" onclick="confirmAction('คุณต้องการลบรายวิชา &quot;<?php echo htmlspecialchars($course['name'], ENT_QUOTES); ?>&quot; หรือไม่?', 'delete_course.php?index=<?php echo $index; ?>'); return false;" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded transition">
                                                 <i class="fas fa-trash mr-1"></i>ลบ
                                             </a>
                                         </td>
@@ -91,6 +92,8 @@ class ManageCoursesView {
             </div>
         </div>
     </main>
+
+    <?php require_once 'views/components/ConfirmModal.php'; ?>
 
     <footer class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white mt-auto">
         <div class="container mx-auto px-6 py-6">
